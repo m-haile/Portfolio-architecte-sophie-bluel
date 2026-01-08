@@ -5,7 +5,7 @@ async function getWorks() {
   const response = await fetch(url);
   if (!response.ok) {
     console.log(`Response status: ${response.status}`);
-    return false;
+    return true; //s'arrete la fonction
   }
 
   const result = await response.json();
@@ -15,8 +15,7 @@ async function getWorks() {
   gallery.innerHTML = ""; // pour vider l'élément
 
   for (let work of result) {
-    console.log(work.title);
-    let html = `<figure>
+    let html = `<figure data-category-id="${work.categoryId}">
             <img src="${work.imageUrl}" alt="${work.title}" />
             <figcaption>${work.title}</figcaption>
         </figure>`; // interpolation
@@ -24,3 +23,51 @@ async function getWorks() {
   }
 }
 getWorks();
+
+async function getCategories() {
+  const url = "http://localhost:5678/api/categories";
+  // Récupérer les catégories avec l'API
+  const response = await fetch(url);
+  if (!response.ok) {
+    console.log(response.status);
+    return true;
+  }
+  const result = await response.json();
+  console.log(result);
+
+  let filtres = document.querySelector(".filtres");
+  filtres.innerHTML = "";
+
+  //Creation du bouton Tous
+  const buttonAll = document.createElement("button");
+  buttonAll.textContent = "Tous";
+  filtres.appendChild(buttonAll);
+
+  //pour que le bouton Tous soit cliquable
+  buttonAll.addEventListener("click", function () {
+    const allElement = document.querySelectorAll(".gallery figure");
+    allElement.forEach(function (element) {
+      element.style.display = "block";
+    });
+  });
+
+  for (let category of result) {
+    //Création des boutons
+    const button = document.createElement("button");
+    filtres.appendChild(button);
+    button.textContent = category.name;
+
+    //Pour que les boutons soient cliquables
+    button.addEventListener("click", function () {
+      const allElement = document.querySelectorAll(".gallery figure");
+      allElement.forEach(function (element) {
+        if (element.dataset.categoryId == category.id) {
+          element.style.display = "block";
+        } else {
+          element.style.display = "none";
+        }
+      });
+    });
+  }
+}
+getCategories();
