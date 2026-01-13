@@ -43,12 +43,21 @@ async function getCategories() {
   buttonAll.textContent = "Tous";
   filtres.appendChild(buttonAll);
 
+  buttonAll.classList.add("active");
+
   //pour que le bouton Tous soit cliquable
   buttonAll.addEventListener("click", function () {
     const allElement = document.querySelectorAll(".gallery figure");
     allElement.forEach(function (element) {
       element.style.display = "block";
     });
+    const buttons = document.querySelectorAll("button");
+    buttons.forEach(function (b) {
+      // b pour le bouton
+      b.classList.remove("active");
+    });
+
+    buttonAll.classList.add("active");
   });
 
   for (let category of result) {
@@ -59,6 +68,13 @@ async function getCategories() {
 
     //Pour que les boutons soient cliquables
     button.addEventListener("click", function () {
+      const buttons = document.querySelectorAll("button");
+      buttons.forEach(function (b) {
+        // b pour le bouton
+        b.classList.remove("active");
+      });
+
+      button.classList.add("active");
       const allElement = document.querySelectorAll(".gallery figure");
       allElement.forEach(function (element) {
         if (element.dataset.categoryId == category.id) {
