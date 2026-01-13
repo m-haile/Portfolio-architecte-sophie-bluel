@@ -22,7 +22,6 @@ async function getWorks() {
     gallery.innerHTML += html;
   }
 }
-getWorks();
 
 async function getCategories() {
   const url = "http://localhost:5678/api/categories";
@@ -86,4 +85,19 @@ async function getCategories() {
     });
   }
 }
-getCategories();
+
+async function login(email, password) {
+  const url = "http://localhost:5678/api/users/login";
+  const response = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email: email, password: password }),
+  });
+  if (!response.ok) {
+    console.log(`Response status: ${response.status}`);
+    return true; //s'arrete la fonction
+  }
+
+  const result = await response.json();
+  console.log(result);
+}
