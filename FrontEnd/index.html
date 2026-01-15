@@ -24,6 +24,11 @@
     <script src="./assets/js/main.js" defer></script>
   </head>
   <body>
+    <!-- Code ajouté pour le bannière -->
+    <div class="hidden banner">
+      <i class="fa-regular fa-pen-to-square"></i>
+      <p>Mode édition</p>
+    </div>
     <header>
       <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
       <nav>
@@ -63,7 +68,13 @@
         </article>
       </section>
       <section id="portfolio">
-        <h2>Mes Projets</h2>
+        <div class="mes-projets">
+          <h2 id="projets">Mes Projets</h2>
+          <div class="hidden modifier">
+            <i class="fa-regular fa-pen-to-square"></i>
+            <p>modifier</p>
+          </div>
+        </div>
         <!--Code ajouté-->
         <div class="filtres"></div>
         <div class="gallery"></div>

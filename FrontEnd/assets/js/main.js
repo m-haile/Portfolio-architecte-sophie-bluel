@@ -16,13 +16,10 @@ if (token) {
     e.preventDefault();
     logout();
   });
-  // pour ajouter d'icon de mod édition
-  const iconHtml = `<i class="fa-regular fa-pen-to-square"></i>`;
-  const divElement = document.createElement("div");
-  divElement.classList.add("icon-div");
-  divElement.innerHTML = iconHtml + "Mode édition";
-  const body = document.querySelector("body");
-  body.prepend(divElement);
+  const hiddenElements = document.querySelectorAll(".hidden");
+  hiddenElements.forEach(function (element) {
+    element.classList.remove("hidden");
+  });
 } else {
   // Déconnecté
   getCategories();

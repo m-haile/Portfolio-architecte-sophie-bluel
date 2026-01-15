@@ -3,10 +3,11 @@ async function login(email, password) {
   const response = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email: email, password: password }),
+    body: JSON.stringify({ email, password }),
   });
   if (!response.ok) {
     console.log(`Response status: ${response.status}`);
+    alert("Api introuvable");
     return true; //s'arrete la fonction
   }
 
