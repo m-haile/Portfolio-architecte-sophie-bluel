@@ -7,7 +7,10 @@ async function login(email, password) {
   });
   if (!response.ok) {
     console.log(`Response status: ${response.status}`);
-    alert("Api introuvable");
+    const errorMessage = document.querySelector(".error-message");
+    errorMessage.style.display = "block";
+    errorMessage.innerText = "Erreur dans l’identifiant ou le mot de passe";
+
     return true; //s'arrete la fonction
   }
 
@@ -20,6 +23,10 @@ async function login(email, password) {
 const loginForm = document.querySelector("#login-form");
 loginForm.addEventListener("submit", function (event) {
   event.preventDefault();
+
+  // Cacher le message d'erreur avant nouvelle tentative
+  const errorMessage = document.querySelector(".error-message");
+  errorMessage.style.display = "none";
 
   const passwordInput = document.querySelector("#password");
   const emailInput = document.querySelector("#email");

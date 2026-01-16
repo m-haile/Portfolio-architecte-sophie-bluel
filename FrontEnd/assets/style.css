@@ -129,8 +129,6 @@ table {
 }
 /** end reset css**/
 body {
-  max-width: 1140px;
-  margin: auto;
   font-family: "Work Sans";
   font-size: 14px;
 }
@@ -262,6 +260,9 @@ footer nav ul {
   justify-content: flex-end;
   margin: 2em;
 }
+
+/*Codes ajoutés*/
+
 button {
   display: flex;
   justify-content: center;
@@ -352,4 +353,12 @@ button.active {
   color: #ffffff;
   gap: 11px;
   font-size: 15px;
+}
+
+.container {
+  max-width: 1140px;
+  margin: auto;
+}
+.error-message {
+  color: red;
 }
