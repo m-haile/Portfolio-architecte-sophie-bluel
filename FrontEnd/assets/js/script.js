@@ -9,16 +9,33 @@ async function getWorks() {
   }
 
   const result = await response.json();
-  console.log(result);
+  return result;
+}
 
+async function displayWorks() {
+  const data = await getWorks();
   let gallery = document.querySelector(".gallery");
   gallery.innerHTML = ""; // pour vider l'élément
 
-  for (let work of result) {
-    let html = `<figure data-category-id="${work.categoryId}">
+  for (let work of data) {
+    let html = `<figure data-id="${work.id}" data-category-id="${work.categoryId}">
             <img src="${work.imageUrl}" alt="${work.title}" />
             <figcaption>${work.title}</figcaption>
         </figure>`; // interpolation
+    gallery.innerHTML += html;
+  }
+}
+
+async function displayWorksInModal() {
+  const data = await getWorks();
+  let gallery = document.querySelector(".gallery-modal");
+  gallery.innerHTML = ""; // pour vider l'élément
+
+  for (let work of data) {
+    let html = `<figure data-id="${work.id}" data-category-id="${work.categoryId}">
+            <img src="${work.imageUrl}" alt="${work.title}" />
+            <i class="fa-regular fa-trash-can"></i>
+          </figure>`; // interpolation
     gallery.innerHTML += html;
   }
 }

@@ -362,3 +362,56 @@ button.active {
 .error-message {
   color: red;
 }
+
+.gallery-modal {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 27px 7px;
+  margin: 0 100px 40px 100px;
+  padding-bottom: 65px;
+  border-bottom: 2px solid #b3b3b3;
+}
+
+.gallery-modal img {
+  height: 100px;
+  object-fit: cover;
+}
+
+.bouton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bouton button {
+  background-color: #1d6154;
+  color: #ffffff;
+  font-family: "Syne";
+  font-size: 14px;
+  font-weight: bold;
+  height: 36px;
+  border-radius: 60px;
+}
+
+.titre h2 {
+  color: #000000;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Work Sans";
+  font-size: 25px;
+  margin: 40px;
+}
+
+dialog {
+  color: #ffffff;
+  min-height: 690px;
+  width: 630px;
+  border-radius: 10px;
+}
+
+.first-screen {
+  display: grid;
+  grid-template-rows: auto, auto, 1fr, auto;
+}
