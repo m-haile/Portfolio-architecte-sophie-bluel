@@ -377,6 +377,21 @@ button.active {
   object-fit: cover;
 }
 
+.gallery-modal figure {
+  position: relative;
+}
+
+.gallery-modal i {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  color: #ffffff;
+  background-color: #000000;
+  padding: 2px;
+  border-radius: 2px;
+  font-size: 15px;
+}
+
 .bouton {
   display: flex;
   justify-content: center;

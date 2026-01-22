@@ -34,10 +34,36 @@ async function displayWorksInModal() {
   for (let work of data) {
     let html = `<figure data-id="${work.id}" data-category-id="${work.categoryId}">
             <img src="${work.imageUrl}" alt="${work.title}" />
-            <i class="fa-regular fa-trash-can"></i>
+            <i class="fa-solid fa-trash-can"></i>
           </figure>`; // interpolation
     gallery.innerHTML += html;
+    const iconElements = document.querySelectorAll("figure i");
+    iconElements.forEach((icon) => {
+      icon.addEventListener("click", (event) => {
+        const workId = icon.parentElement.dataset.id;
+        deleteWorks(workId);
+      });
+    });
   }
+}
+
+//pour supprimer les image vers la prmiere modale
+async function deleteWorks(id) {
+  const request = await fetch(`http://localhost:5678/api/works/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
+
+  if (!request.ok) {
+    console.log(request.status);
+    return true;
+  }
+  const figureElements = document.querySelectorAll(`figure[data-id="${id}"]`);
+  figureElements.forEach(function (figureElement) {
+    figureElement.remove();
+  });
 }
 
 async function getCategories() {
