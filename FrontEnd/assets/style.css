@@ -451,3 +451,52 @@ dialog {
   margin: 20px 30px 15px 30px;
   cursor: pointer;
 }
+
+.second-screen .navigation {
+  justify-content: space-between;
+}
+
+.second-screen form {
+  width: 420px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: #3d3d3d;
+}
+
+.image-label {
+  height: 170px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  background-color: #e8f1f6;
+  gap: 12px;
+}
+
+.image-label i {
+  color: #b9c5cc;
+  font-size: 60px;
+}
+
+.ajoutPhoto {
+  background-color: #cbd6dc;
+  color: #306685;
+  border-radius: 50px;
+  height: 35px;
+  width: 170px;
+  font-size: 14px;
+  font-family: "Work Sans";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.image-label p {
+  color: #444444;
+  font-size: 10px;
+  font-family: "Work Sans";
+}

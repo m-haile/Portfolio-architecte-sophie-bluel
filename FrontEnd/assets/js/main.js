@@ -51,6 +51,8 @@ if (token) {
   // divBouton.appendChild(boutonPhoto);
   displayWorksInModal();
 
+  displayCategoryOptions();
+
   /******* Deuxième écran   *******/ // create by html
   // const secondScreen = createDiv("second-screen", dialogElement);
   // const secondNavigation = createDiv("navigation", secondScreen);

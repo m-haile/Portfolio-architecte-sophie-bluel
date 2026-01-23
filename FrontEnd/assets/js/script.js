@@ -79,6 +79,14 @@ async function getCategories() {
   const result = await response.json();
   return result;
 }
+// la 2em modale
+async function displayCategoryOptions() {
+  const result = await getCategories();
+  const selectElemnt = document.querySelector("#category");
+  result.forEach(function (category) {
+    selectElemnt.innerHTML += `<option value="${category.id}">${category.name}</option>`;
+  });
+}
 
 async function displayCategories() {
   const result = await getCategories();
