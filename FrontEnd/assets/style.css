@@ -434,6 +434,12 @@ dialog {
   display: none;
 }
 
+.second-screen {
+  /* display: none; */
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+}
+
 .navigation {
   display: flex;
   justify-content: flex-end;
