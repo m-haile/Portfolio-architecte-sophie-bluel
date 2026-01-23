@@ -1,5 +1,5 @@
+//pour récupérer les données
 async function getWorks() {
-  // asynchrone; not at the same time
   const url = "http://localhost:5678/api/works";
 
   const response = await fetch(url);
@@ -7,44 +7,45 @@ async function getWorks() {
     console.log(`Response status: ${response.status}`);
     return true; //s'arrete la fonction
   }
-
+  //pour traduire les données de chaîne de caractère en javaScript
   const result = await response.json();
   return result;
 }
 
 async function displayWorks() {
-  const data = await getWorks();
+  const data = await getWorks(); // pour récupérer les données de works
   let gallery = document.querySelector(".gallery");
   gallery.innerHTML = ""; // pour vider l'élément
 
-  for (let work of data) {
+  data.forEach(function (work) {
     let html = `<figure data-id="${work.id}" data-category-id="${work.categoryId}">
             <img src="${work.imageUrl}" alt="${work.title}" />
             <figcaption>${work.title}</figcaption>
         </figure>`; // interpolation
-    gallery.innerHTML += html;
-  }
+    gallery.innerHTML += html; //à la place d'append child// pour insérer(mettre à l'intérieur) les éléments HTML
+  });
 }
 
+// pour créer les projet dans la modale
 async function displayWorksInModal() {
-  const data = await getWorks();
-  let gallery = document.querySelector(".gallery-modal");
+  const data = await getWorks(); // pour récupérer les données de works
+  const gallery = document.querySelector(".gallery-modal");
   gallery.innerHTML = ""; // pour vider l'élément
 
-  for (let work of data) {
-    let html = `<figure data-id="${work.id}" data-category-id="${work.categoryId}">
+  data.forEach(function (work) {
+    const html = `<figure data-id="${work.id}" data-category-id="${work.categoryId}">
             <img src="${work.imageUrl}" alt="${work.title}" />
             <i class="fa-solid fa-trash-can"></i>
           </figure>`; // interpolation
     gallery.innerHTML += html;
-    const iconElements = document.querySelectorAll("figure i");
+    const iconElements = document.querySelectorAll("figure i"); //Les éléments i(icons) qui sont à l'intérieur des éléments figure
     iconElements.forEach((icon) => {
       icon.addEventListener("click", (event) => {
-        const workId = icon.parentElement.dataset.id;
+        const workId = icon.parentElement.dataset.id; //pour récupérer l'id de work
         deleteWorks(workId);
       });
     });
-  }
+  });
 }
 
 //pour supprimer les image vers la prmiere modale
@@ -66,6 +67,7 @@ async function deleteWorks(id) {
   });
 }
 
+//Ajouter dynamiquement les filtres des travaux
 async function getCategories() {
   const url = "http://localhost:5678/api/categories";
   // Récupérer les catégories avec l'API
@@ -75,8 +77,11 @@ async function getCategories() {
     return true;
   }
   const result = await response.json();
-  console.log(result);
+  return result;
+}
 
+async function displayCategories() {
+  const result = await getCategories();
   let filtres = document.querySelector(".filtres");
   filtres.innerHTML = "";
 

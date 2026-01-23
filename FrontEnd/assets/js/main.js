@@ -25,8 +25,21 @@ if (token) {
   const body = document.querySelector("body");
   body.appendChild(dialogElement);
 
+  /******* Premier écran   *******/
   const firstScreen = createDiv("first-screen", dialogElement);
   const divNavigation = createDiv("navigation", firstScreen);
+  // divNavigation.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
+  const iconX = document.createElement("i");
+  iconX.classList.add("fa-solid");
+  iconX.classList.add("fa-xmark");
+  divNavigation.appendChild(iconX);
+  iconX.addEventListener("click", (event) => {
+    dialogElement.close();
+  });
+  const modifier = document.querySelector(".modifier");
+  modifier.addEventListener("click", (event) => {
+    dialogElement.showModal();
+  });
   const divTitre = createDiv("titre", firstScreen);
   divTitre.innerHTML = "<h2>Galerie photo</h2>";
   const divGallery = createDiv("gallery-modal", firstScreen);
@@ -35,6 +48,23 @@ if (token) {
   boutonPhoto.innerText = "Ajouter une photo";
   divBouton.appendChild(boutonPhoto);
   displayWorksInModal();
+
+  /******* Deuxième écran   *******/
+  const secondScreen = createDiv("second-screen", dialogElement);
+  const secondNavigation = createDiv("navigation", secondScreen);
+  const secondTitre = createDiv("titre", secondScreen);
+  secondTitre.innerHTML = `<h2>Ajout photo</h2>`;
+  const form = createDiv("formulaire", secondScreen);
+  form.innerHTML = `<form>
+    <label for="image"></label>
+    <input hidden type="file" id="image" name="image"/>
+    <label for="title">Titre</label>
+    <input type="text" id="title" name="title"/>
+    <label for="category">Catégorie</label>
+    <select id="category" name="category"></select>
+    <button type="submit">Valider</button>
+  </form>`;
+
   dialogElement.showModal();
 } else {
   // Déconnecté
