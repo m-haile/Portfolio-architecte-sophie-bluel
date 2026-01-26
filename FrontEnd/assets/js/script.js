@@ -141,3 +141,14 @@ async function displayCategories() {
     });
   }
 }
+
+function displayImage(file) {
+  let imageLabel = document.querySelector(".image-label");
+  // Créer l'aperçu de l'image avec un objet URL
+  const img = document.createElement("img");
+  img.src = URL.createObjectURL(file);
+  img.alt = file.name;
+  // Remplace le contenu d'image label avec l'image
+  imageLabel.innerHTML = "";
+  imageLabel.appendChild(img);
+}

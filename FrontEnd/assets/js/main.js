@@ -20,64 +20,46 @@ if (token) {
   hiddenElements.forEach(function (element) {
     element.classList.remove("hidden");
   });
-  // // créer la balise dialog
-  // const dialogElement = document.createElement("dialog");
-  // const body = document.querySelector("body");
-  // body.appendChild(dialogElement);
 
-  /******* Premier écran   *******/ // create by html
-  // const firstScreen = createDiv("first-screen", dialogElement);
-  // const divNavigation = createDiv("navigation", firstScreen);
-  // // divNavigation.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
-  // const iconX = document.createElement("i");
-  // iconX.classList.add("fa-solid");
-  // iconX.classList.add("fa-xmark");
-  // divNavigation.appendChild(iconX);
   const dialogElement = document.querySelector("dialog");
-  const iconX = document.querySelector(".fa-xmark");
-  iconX.addEventListener("click", (event) => {
-    dialogElement.close();
+  const iconXs = document.querySelectorAll(".fa-xmark");
+  iconXs.forEach(function (iconX) {
+    iconX.addEventListener("click", (event) => {
+      dialogElement.close();
+    });
   });
+
   const modifier = document.querySelector(".modifier");
   modifier.addEventListener("click", (event) => {
     dialogElement.showModal();
   });
-  // const divTitre = createDiv("titre", firstScreen);
-  // divTitre.innerHTML = "<h2>Galerie photo</h2>";
-  // const divGallery = createDiv("gallery-modal", firstScreen);
-  // const divBouton = createDiv("bouton", firstScreen);
-  // const boutonPhoto = document.createElement("button");
-  // boutonPhoto.innerText = "Ajouter une photo";
-  // divBouton.appendChild(boutonPhoto);
+
   displayWorksInModal();
 
   displayCategoryOptions();
 
-  /******* Deuxième écran   *******/ // create by html
-  // const secondScreen = createDiv("second-screen", dialogElement);
-  // const secondNavigation = createDiv("navigation", secondScreen);
-  // const secondTitre = createDiv("titre", secondScreen);
-  // secondTitre.innerHTML = `<h2>Ajout photo</h2>`;
-  // const form = createDiv("formulaire", secondScreen);
-  // form.innerHTML = `<form>
-  //   <label for="image"></label>
-  //   <input hidden type="file" id="image" name="image"/>
-  //   <label for="title">Titre</label>
-  //   <input type="text" id="title" name="title"/>
-  //   <label for="category">Catégorie</label>
-  //   <select id="category" name="category"></select>
-  //   <button type="submit">Valider</button>
-  // </form>`;
+  const firstScreen = document.querySelector(".first-screen");
+  const secondScreen = document.querySelector(".second-screen");
+  const arrowElement = document.querySelector(".fa-arrow-left");
+  arrowElement.addEventListener("click", () => {
+    firstScreen.style.display = "grid";
+    secondScreen.style.display = "none";
+  });
+
+  const changeScreen = document.querySelector(".change-screen");
+  changeScreen.addEventListener("click", () => {
+    firstScreen.style.display = "none";
+    secondScreen.style.display = "grid";
+  });
+
+  const imageInput = document.querySelector("#image");
+  imageInput.addEventListener("change", () => {
+    const file = imageInput.files[0];
+    displayImage(file);
+  });
 
   dialogElement.showModal();
 } else {
   // Déconnecté
   getCategories();
-}
-
-function createDiv(classe, parent) {
-  const divElement = document.createElement("div");
-  divElement.classList.add(classe);
-  parent.appendChild(divElement);
-  return divElement;
 }

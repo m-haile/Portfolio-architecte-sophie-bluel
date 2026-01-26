@@ -112,7 +112,9 @@
         <div class="navigation"><i class="fa-solid fa-xmark"></i></div>
         <div class="titre"><h2>Galerie photo</h2></div>
         <div class="gallery-modal"></div>
-        <div class="bouton"><button>Ajouter une photo</button></div>
+        <div class="bouton">
+          <button class="change-screen">Ajouter une photo</button>
+        </div>
       </div>
       <div class="second-screen">
         <div class="navigation">
@@ -127,12 +129,14 @@
               <div class="ajoutPhoto">+ Ajouter photo</div>
               <p>jpg, png : 4mo max</p>
             </label>
-            <input hidden="" type="file" id="image" name="image" />
+            <input hidden type="file" id="image" name="image" />
             <label for="title">Titre</label>
             <input type="text" id="title" name="title" />
             <label for="category">Catégorie</label>
             <select id="category" name="category"></select>
-            <button type="submit">Valider</button>
+            <div class="submit-div">
+              <button type="submit">Valider</button>
+            </div>
           </form>
         </div>
       </div>

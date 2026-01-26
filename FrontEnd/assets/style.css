@@ -429,14 +429,12 @@ dialog {
 }
 
 .first-screen {
-  /* display: grid; */
+  display: grid;
   grid-template-rows: auto auto 1fr auto;
-  display: none;
 }
 
 .second-screen {
-  /* display: none; */
-  display: grid;
+  display: none;
   grid-template-rows: auto auto 1fr;
 }
 
@@ -476,6 +474,11 @@ dialog {
   gap: 12px;
 }
 
+.image-label img {
+  height: 100%;
+  object-fit: cover;
+}
+
 .image-label i {
   color: #b9c5cc;
   font-size: 60px;
@@ -499,4 +502,26 @@ dialog {
   color: #444444;
   font-size: 10px;
   font-family: "Work Sans";
+}
+
+input#title,
+#category {
+  padding: 15px;
+  color: #444444;
+  box-shadow: 0 4px 14px black;
+  border: none;
+}
+
+form button {
+  background-color: #1d6154;
+  color: #ffffff;
+  width: 70%;
+}
+
+.submit-div {
+  border-top: 1px solid #b3b3b3;
+  margin-top: 50px;
+  padding-top: 30px;
+  display: flex;
+  justify-content: center;
 }
