@@ -4,6 +4,7 @@ function logout() {
   localStorage.removeItem("token");
   window.location.href = "index.html";
 }
+
 const token = localStorage.getItem("token");
 
 if (token) {
@@ -16,6 +17,7 @@ if (token) {
     e.preventDefault();
     logout();
   });
+
   const hiddenElements = document.querySelectorAll(".hidden");
   hiddenElements.forEach(function (element) {
     element.classList.remove("hidden");
@@ -56,6 +58,23 @@ if (token) {
   imageInput.addEventListener("change", () => {
     const file = imageInput.files[0];
     displayImage(file);
+  });
+
+  const formList = document.querySelector(".form-list");
+  formList.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    // Avant d'appeler addNewWork, vérifie si les trois champs sont remplis (value !== "")
+    if (
+      imageInput.value !== "" &&
+      titleInput.value !== "" &&
+      categorySelect.value !== ""
+    ) {
+      addNewWork(formList);
+    } else {
+      const errorMessage = document.querySelector(".error-message");
+      errorMessage.innerText = "Veuillez remplir tous les champs";
+    }
   });
 
   dialogElement.showModal();
