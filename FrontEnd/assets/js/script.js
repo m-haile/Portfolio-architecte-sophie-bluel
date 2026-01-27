@@ -82,9 +82,10 @@ async function getCategories() {
 // la 2em modale
 async function displayCategoryOptions() {
   const result = await getCategories();
-  const selectElemnt = document.querySelector("#category");
+  const selectElement = document.querySelector("#category");
+  selectElement.innerHTML = `<option value=""></option>`;
   result.forEach(function (category) {
-    selectElemnt.innerHTML += `<option value="${category.id}">${category.name}</option>`;
+    selectElement.innerHTML += `<option value="${category.id}">${category.name}</option>`;
   });
 }
 

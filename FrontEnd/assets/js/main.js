@@ -60,16 +60,34 @@ if (token) {
     displayImage(file);
   });
 
+  const titleInput = document.querySelector("#title");
+  const categorySelect = document.querySelector("#category");
+
+  function validateForm() {
+    return (
+      imageInput.value !== "" &&
+      titleInput.value !== "" &&
+      categorySelect.value !== ""
+    );
+  }
+
   const formList = document.querySelector(".form-list");
+  const submitButton = document.querySelector(".submit-div button");
+  formList.querySelectorAll("input,select").forEach((element) => {
+    element.addEventListener("change", function () {
+      if (validateForm()) {
+        submitButton.classList.remove("disabled");
+      } else {
+        submitButton.classList.add("disabled");
+      }
+    });
+  });
+
   formList.addEventListener("submit", (e) => {
     e.preventDefault();
 
     // Avant d'appeler addNewWork, vérifie si les trois champs sont remplis (value !== "")
-    if (
-      imageInput.value !== "" &&
-      titleInput.value !== "" &&
-      categorySelect.value !== ""
-    ) {
+    if (validateForm()) {
       addNewWork(formList);
     } else {
       const errorMessage = document.querySelector(".error-message");

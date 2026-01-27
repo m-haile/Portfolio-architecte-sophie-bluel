@@ -526,3 +526,7 @@ form button {
   display: flex;
   justify-content: center;
 }
+
+.disabled {
+  background-color: #a7a7a7;
+}
