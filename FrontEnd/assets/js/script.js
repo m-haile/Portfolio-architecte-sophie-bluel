@@ -155,39 +155,43 @@ function displayImage(file) {
 
 async function addNewWork(formList) {
   const url = "http://localhost:5678/api/works";
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-    body: new FormData(formList),
-  });
-
-  if (response.ok) {
-    const work = await response.json();
-
-    formList.querySelectorAll("input, select").forEach(function (element) {
-      element.value = "";
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: new FormData(formList),
     });
-    formList.querySelector(".image-label").innerHTML =
-      `  <i class="fa-solid fa-image"></i>
+
+    if (response.ok) {
+      const work = await response.json();
+
+      formList.querySelectorAll("input, select").forEach(function (element) {
+        element.value = "";
+      });
+      formList.querySelector(".image-label").innerHTML =
+        `  <i class="fa-solid fa-image"></i>
               <div class="ajoutPhoto">+ Ajouter photo</div>
               <p>jpg, png : 4mo max</p>`;
 
-    let gallery = document.querySelector(".gallery");
-    let html = `<figure data-id="${work.id}" data-category-id="${work.categoryId}">
+      let gallery = document.querySelector(".gallery");
+      let html = `<figure data-id="${work.id}" data-category-id="${work.categoryId}">
             <img src="${work.imageUrl}" alt="${work.title}" />
             <figcaption>${work.title}</figcaption>
         </figure>`; // interpolation
-    gallery.innerHTML += html;
+      gallery.innerHTML += html;
 
-    const galleryModal = document.querySelector(".gallery-modal");
-    const htmlModal = `<figure data-id="${work.id}" data-category-id="${work.categoryId}">
+      const galleryModal = document.querySelector(".gallery-modal");
+      const htmlModal = `<figure data-id="${work.id}" data-category-id="${work.categoryId}">
             <img src="${work.imageUrl}" alt="${work.title}" />
             <i class="fa-solid fa-trash-can"></i>
           </figure>`; // interpolation
-    galleryModal.innerHTML += htmlModal;
-    return true;
+      galleryModal.innerHTML += htmlModal;
+      return true;
+    }
+    return false;
+  } catch (error) {
+    console.log(error);
   }
-  return false;
 }

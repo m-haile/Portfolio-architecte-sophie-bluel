@@ -86,17 +86,19 @@ if (token) {
   formList.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    // Avant d'appeler addNewWork, vérifie si les trois champs sont remplis (value !== "")
+    const errorMessage = document.querySelector(".error-message");
     if (validateForm()) {
-      addNewWork(formList);
+      addNewWork(formList).then((success) => {
+        if (!success) {
+          errorMessage.innerText = "Erreur lors de l'ajout";
+        }
+      });
     } else {
-      const errorMessage = document.querySelector(".error-message");
       errorMessage.innerText = "Veuillez remplir tous les champs";
     }
   });
 
   dialogElement.showModal();
 } else {
-  // Déconnecté
   getCategories();
 }
