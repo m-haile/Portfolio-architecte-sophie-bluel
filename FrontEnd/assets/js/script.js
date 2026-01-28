@@ -1,7 +1,6 @@
-//pour récupérer les données
+//on devine qu’elle va récupérer des des travaux(works)
 async function getWorks() {
-  const url = "http://localhost:5678/api/works";
-
+  const url = "http://localhost:5678/api/works"; // c’est le chemin pour demander la liste des
   const response = await fetch(url);
   if (!response.ok) {
     console.log(`Response status: ${response.status}`);
