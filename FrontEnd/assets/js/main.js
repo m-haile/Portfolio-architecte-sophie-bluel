@@ -97,8 +97,6 @@ if (token) {
       errorMessage.innerText = "Veuillez remplir tous les champs";
     }
   });
-
-  dialogElement.showModal();
 } else {
   getCategories();
 }

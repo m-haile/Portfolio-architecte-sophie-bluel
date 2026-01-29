@@ -188,6 +188,13 @@ async function addNewWork(formList) {
             <i class="fa-solid fa-trash-can"></i>
           </figure>`; // interpolation
       galleryModal.innerHTML += htmlModal;
+
+      const icon = document.querySelector(`figure[data-id="${work.id}"] i`);
+      icon.addEventListener("click", (event) => {
+        const workId = icon.parentElement.dataset.id; //pour récupérer l'id de work
+        deleteWorks(workId);
+      });
+
       return true;
     }
     return false;
