@@ -97,6 +97,12 @@ if (token) {
       errorMessage.innerText = "Veuillez remplir tous les champs";
     }
   });
+  // Close modal when clicking outside (on backdrop)
+  dialogElement.addEventListener("click", (event) => {
+    if (event.target == dialogElement) {
+      dialogElement.close();
+    }
+  });
 } else {
   getCategories();
 }
