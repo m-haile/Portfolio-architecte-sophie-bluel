@@ -11,8 +11,7 @@ async function getWorks() {
   return result;
 }
 
-async function displayWorks() {
-  const data = await getWorks(); // pour récupérer les données de works
+function displayWorks(data) {
   let gallery = document.querySelector(".gallery");
   gallery.innerHTML = ""; // pour vider l'élément
 
@@ -26,8 +25,7 @@ async function displayWorks() {
 }
 
 // pour créer les projet dans la modale
-async function displayWorksInModal() {
-  const data = await getWorks(); // pour récupérer les données de works
+function displayWorksInModal(data) {
   const gallery = document.querySelector(".gallery-modal");
   gallery.innerHTML = ""; // pour vider l'élément
 

@@ -1,5 +1,3 @@
-displayWorks();
-
 function logout() {
   localStorage.removeItem("token");
   window.location.href = "index.html";
@@ -36,7 +34,11 @@ if (token) {
     dialogElement.showModal();
   });
 
-  displayWorksInModal();
+  getWorks().then((data) => {
+    displayWorks(data);
+
+    displayWorksInModal(data);
+  });
 
   displayCategoryOptions();
 
@@ -104,5 +106,8 @@ if (token) {
     }
   });
 } else {
+  getWorks().then((data) => {
+    displayWorks(data);
+  });
   getCategories();
 }
