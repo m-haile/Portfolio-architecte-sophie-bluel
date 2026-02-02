@@ -58,6 +58,7 @@ async function deleteWorks(id) {
     console.log(request.status);
     return true;
   }
+
   const figureElements = document.querySelectorAll(`figure[data-id="${id}"]`);
   figureElements.forEach(function (figureElement) {
     figureElement.remove();
@@ -76,6 +77,7 @@ async function getCategories() {
   const result = await response.json();
   return result;
 }
+
 // la 2em modale
 async function displayCategoryOptions() {
   const result = await getCategories();
@@ -153,6 +155,7 @@ function displayImage(file) {
 
 async function addNewWork(formList) {
   const url = "http://localhost:5678/api/works";
+
   try {
     const response = await fetch(url, {
       method: "POST",
@@ -168,6 +171,7 @@ async function addNewWork(formList) {
       formList.querySelectorAll("input, select").forEach(function (element) {
         element.value = "";
       });
+
       formList.querySelector(".image-label").innerHTML =
         `  <i class="fa-solid fa-image"></i>
               <div class="ajoutPhoto">+ Ajouter photo</div>
@@ -188,6 +192,7 @@ async function addNewWork(formList) {
       galleryModal.innerHTML += htmlModal;
 
       const icon = document.querySelector(`figure[data-id="${work.id}"] i`);
+
       icon.addEventListener("click", (event) => {
         const workId = icon.parentElement.dataset.id; //pour récupérer l'id de work
         deleteWorks(workId);
@@ -195,6 +200,7 @@ async function addNewWork(formList) {
 
       return true;
     }
+
     return false;
   } catch (error) {
     console.log(error);

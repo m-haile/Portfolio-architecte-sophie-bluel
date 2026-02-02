@@ -5,6 +5,7 @@ async function login(email, password) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
   });
+
   if (!response.ok) {
     console.log(`Response status: ${response.status}`);
     const errorMessage = document.querySelector(".error-message");
@@ -24,7 +25,6 @@ const loginForm = document.querySelector("#login-form");
 loginForm.addEventListener("submit", function (event) {
   event.preventDefault();
 
-  // Cacher le message d'erreur avant nouvelle tentative
   const errorMessage = document.querySelector(".error-message");
   errorMessage.style.display = "none";
 
