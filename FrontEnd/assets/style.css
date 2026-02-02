@@ -511,7 +511,7 @@ input#title,
 #category {
   padding: 15px;
   color: #444444;
-  box-shadow: 0 4px 14px black;
+  box-shadow: 0 4px 14px 0;
   border: none;
 }
 
