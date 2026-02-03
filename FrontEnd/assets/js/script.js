@@ -103,14 +103,15 @@ async function displayCategories() {
   buttonAll.textContent = "Tous";
   filtres.appendChild(buttonAll);
 
-  buttonAll.classList.add("active");
+  buttonAll.classList.add("active"); //
 
   //pour que le bouton Tous soit cliquable
   buttonAll.addEventListener("click", function () {
-    const allElement = document.querySelectorAll(".gallery figure");
+    const allElement = document.querySelectorAll(".gallery figure"); //pour les selectioner les élément figure qui sont dans la gallery
     allElement.forEach(function (element) {
       element.style.display = "block";
     });
+
     const buttons = document.querySelectorAll("button");
     buttons.forEach(function (b) {
       // b pour le bouton
@@ -130,7 +131,7 @@ async function displayCategories() {
     button.addEventListener("click", function () {
       const buttons = document.querySelectorAll("button");
       buttons.forEach(function (b) {
-        // b pour le bouton
+        //pour retire la classe active
         b.classList.remove("active");
       });
 
@@ -147,6 +148,7 @@ async function displayCategories() {
   }
 }
 
+//pour créer  l'aperçu dans la 2em modale
 function displayImage(file) {
   let imageLabel = document.querySelector(".image-label");
   // Créer l'aperçu de l'image avec un objet URL
@@ -158,6 +160,7 @@ function displayImage(file) {
   imageLabel.appendChild(img);
 }
 
+// pour ajouter une nouvelle oeuvre
 async function addNewWork(formList) {
   const url = "http://localhost:5678/api/works";
 
@@ -167,16 +170,19 @@ async function addNewWork(formList) {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-      body: new FormData(formList),
+      body: new FormData(formList), // pour envoyer un ficher
     });
 
+    //pour recupére nouveau traveax
     if (response.ok) {
       const work = await response.json();
 
+      //on vide le formulaire
       formList.querySelectorAll("input, select").forEach(function (element) {
         element.value = "";
       });
 
+      //pour remplacer l'aperçu avec le HTML du début
       formList.querySelector(".image-label").innerHTML =
         `  <i class="fa-solid fa-image"></i>
               <div class="ajoutPhoto">+ Ajouter photo</div>
@@ -196,7 +202,7 @@ async function addNewWork(formList) {
           </figure>`; // interpolation
       galleryModal.innerHTML += htmlModal;
 
-      const icon = document.querySelector(`figure[data-id="${work.id}"] i`);
+      const icon = document.querySelector(`figure[data-id="${work.id}"] i`); //icon de poubelle
 
       icon.addEventListener("click", (event) => {
         const workId = icon.parentElement.dataset.id; //pour récupérer l'id de work
