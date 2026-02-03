@@ -37,6 +37,7 @@ if (token) {
     dialogElement.showModal();
   });
 
+  //data c'est le résultat de getWorks
   getWorks().then((data) => {
     displayWorks(data);
 
@@ -118,5 +119,5 @@ if (token) {
     displayWorks(data);
   });
 
-  getCategories();
+  displayCategories();
 }

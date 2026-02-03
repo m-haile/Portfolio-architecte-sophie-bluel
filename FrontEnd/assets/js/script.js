@@ -1,16 +1,17 @@
-//on devine qu’elle va récupérer des des travaux(works)
+//on devine qu’elle va récupérer  des travaux(works)
 async function getWorks() {
-  const url = "http://localhost:5678/api/works"; // c’est le chemin pour demander la liste des
+  const url = "http://localhost:5678/api/works"; // c’est le chemin pour demander la liste des travaux
   const response = await fetch(url);
   if (!response.ok) {
     console.log(`Response status: ${response.status}`);
     return true; //s'arrete la fonction
   }
   //pour traduire les données de chaîne de caractère en javaScript
-  const result = await response.json();
+  const result = await response.json(); //comme type de variable c'est tableau d'objets
   return result;
 }
 
+//pour afficher des travaux
 function displayWorks(data) {
   let gallery = document.querySelector(".gallery");
   gallery.innerHTML = ""; // pour vider l'élément
@@ -38,7 +39,8 @@ function displayWorksInModal(data) {
     const iconElements = document.querySelectorAll("figure i"); //Les éléments i(icons) qui sont à l'intérieur des éléments figure
     iconElements.forEach((icon) => {
       icon.addEventListener("click", (event) => {
-        const workId = icon.parentElement.dataset.id; //pour récupérer l'id de work
+        //pour récupérer l'id de work
+        const workId = icon.parentElement.dataset.id;
         deleteWorks(workId);
       });
     });
@@ -50,25 +52,28 @@ async function deleteWorks(id) {
   const request = await fetch(`http://localhost:5678/api/works/${id}`, {
     method: "DELETE",
     headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      // protocol
+      Authorization: `Bearer ${localStorage.getItem("token")}`, // pour s'identifier de l'api
     },
   });
 
+  //if not delete the function will stop// s'il arrive pas à supprimer s'arrete l'function.
   if (!request.ok) {
     console.log(request.status);
     return true;
   }
 
+  //pour selectioner les élélement figure qui ont l'attribut data-id egal à l'id qu'on veut supprimer
   const figureElements = document.querySelectorAll(`figure[data-id="${id}"]`);
   figureElements.forEach(function (figureElement) {
     figureElement.remove();
   });
 }
 
-//Ajouter dynamiquement les filtres des travaux
+// Récupérer les catégories de l'API
 async function getCategories() {
   const url = "http://localhost:5678/api/categories";
-  // Récupérer les catégories avec l'API
+
   const response = await fetch(url);
   if (!response.ok) {
     console.log(response.status);
@@ -78,11 +83,11 @@ async function getCategories() {
   return result;
 }
 
-// la 2em modale
+//pour créer les options Category
 async function displayCategoryOptions() {
   const result = await getCategories();
   const selectElement = document.querySelector("#category");
-  selectElement.innerHTML = `<option value=""></option>`;
+  selectElement.innerHTML = `<option value=""></option>`; //on le lesse vide ("") pour pas séléctioner par défaut.
   result.forEach(function (category) {
     selectElement.innerHTML += `<option value="${category.id}">${category.name}</option>`;
   });
