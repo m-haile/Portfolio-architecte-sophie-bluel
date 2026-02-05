@@ -1,26 +1,27 @@
 //on devine qu’elle va récupérer  des travaux(works)
 async function getWorks() {
-  const url = "http://localhost:5678/api/works"; // c’est le chemin pour demander la liste des travaux
+  const url = "http://localhost:5678/api/works"; //je définit l'adresse de l'API que je veux contacter
   const response = await fetch(url);
   if (!response.ok) {
     console.log(`Response status: ${response.status}`);
-    return true; //s'arrete la fonction
+    return null;
   }
-  //pour traduire les données de chaîne de caractère en javaScript
-  const result = await response.json(); //comme type de variable c'est tableau d'objets
+
+  // Traduction des données JSON en objet JavaScript
+  const result = await response.json();
   return result;
 }
 
 //pour afficher des travaux
 function displayWorks(data) {
   let gallery = document.querySelector(".gallery");
-  gallery.innerHTML = ""; // pour vider l'élément
+  gallery.innerHTML = "";
 
   data.forEach(function (work) {
     let html = `<figure data-id="${work.id}" data-category-id="${work.categoryId}">
             <img src="${work.imageUrl}" alt="${work.title}" />
             <figcaption>${work.title}</figcaption>
-        </figure>`; // interpolation
+        </figure>`;
     gallery.innerHTML += html; //à la place d'append child// pour insérer(mettre à l'intérieur) les éléments HTML
   });
 }
@@ -52,7 +53,6 @@ async function deleteWorks(id) {
   const request = await fetch(`http://localhost:5678/api/works/${id}`, {
     method: "DELETE",
     headers: {
-      // protocol
       Authorization: `Bearer ${localStorage.getItem("token")}`, // pour s'identifier de l'api
     },
   });
@@ -93,6 +93,7 @@ async function displayCategoryOptions() {
   });
 }
 
+//pour afficher les boutons filtres
 async function displayCategories() {
   const result = await getCategories();
   let filtres = document.querySelector(".filtres");
