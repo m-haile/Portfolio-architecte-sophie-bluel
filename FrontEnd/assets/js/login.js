@@ -1,3 +1,4 @@
+//function login
 async function login(email, password) {
   const url = "http://localhost:5678/api/users/login";
   const response = await fetch(url, {
@@ -12,13 +13,13 @@ async function login(email, password) {
     errorMessage.style.display = "block";
     errorMessage.innerText = "Erreur dans l’identifiant ou le mot de passe";
 
-    return true; //s'arrete la fonction
+    return true; //arrete la fonction
   }
 
   const result = await response.json();
   console.log(result.token);
   localStorage.setItem("token", result.token);
-  window.location.href = "index.html";
+  window.location.href = "index.html"; // redirige(envoyer utilisateur) vers index.html
 }
 
 const loginForm = document.querySelector("#login-form");
