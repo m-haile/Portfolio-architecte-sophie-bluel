@@ -1,12 +1,12 @@
-//pour déconecter
-function logout() {
-  localStorage.removeItem("token");
-  window.location.href = "index.html";
-}
-
 //Connecté si on a le token
 const token = localStorage.getItem("token");
-if (token) {
+if (!token) {
+  getWorks().then((data) => {
+    displayWorks(data);
+  });
+
+  displayCategories();
+} else {
   const loginElement = document.querySelector("#login-page");
   loginElement.innerText = "logout";
   loginElement.href = "#"; //pour rester sur la meme page
@@ -87,6 +87,7 @@ if (token) {
   const formList = document.querySelector(".form-list");
   const submitButton = document.querySelector(".submit-div button");
 
+  //Selectionne  les inputs et le select du formulaire
   formList.querySelectorAll("input,select").forEach((element) => {
     element.addEventListener("change", function () {
       if (validateForm()) {
@@ -113,16 +114,10 @@ if (token) {
     }
   });
 
-  // Close modal when clicking outside (on backdrop)
+  // Quand on click hors de la modale pour fermer la modale
   dialogElement.addEventListener("click", (event) => {
     if (event.target == dialogElement) {
       dialogElement.close();
     }
   });
-} else {
-  getWorks().then((data) => {
-    displayWorks(data);
-  });
-
-  displayCategories();
 }

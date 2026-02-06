@@ -26,7 +26,7 @@ function displayWorks(data) {
   });
 }
 
-// pour créer les projet dans la modale
+// pour créer(afficher) les travaux dans la modale
 function displayWorksInModal(data) {
   const gallery = document.querySelector(".gallery-modal");
   gallery.innerHTML = ""; // pour vider l'élément
@@ -57,10 +57,9 @@ async function deleteWorks(id) {
     },
   });
 
-  //if not delete the function will stop// s'il arrive pas à supprimer s'arrete l'function.
   if (!request.ok) {
     console.log(request.status);
-    return true;
+    return;
   }
 
   //pour selectioner les élélement figure qui ont l'attribut data-id egal à l'id qu'on veut supprimer
@@ -217,4 +216,9 @@ async function addNewWork(formList) {
   } catch (error) {
     console.log(error);
   }
+}
+//pour se déconnecter
+function logout() {
+  localStorage.removeItem("token");
+  window.location.href = "index.html";
 }

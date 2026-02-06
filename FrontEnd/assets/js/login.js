@@ -27,12 +27,23 @@ loginForm.addEventListener("submit", function (event) {
   event.preventDefault();
 
   const errorMessage = document.querySelector(".error-message");
-  errorMessage.style.display = "none";
 
   const passwordInput = document.querySelector("#password");
   const emailInput = document.querySelector("#email");
 
-  if (passwordInput.value != "" && emailInput.value != "") {
+  if (
+    passwordInput.value != "" &&
+    emailInput.value != "" &&
+    isValidEmail(emailInput.value)
+  ) {
     login(emailInput.value, passwordInput.value);
+  } else {
+    errorMessage.innerText = "Entrez un email et un mot de passe.";
   }
 });
+
+function isValidEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  return emailRegex.test(email);
+}
