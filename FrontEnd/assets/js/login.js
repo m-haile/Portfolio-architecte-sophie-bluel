@@ -13,13 +13,13 @@ async function login(email, password) {
     errorMessage.style.display = "block";
     errorMessage.innerText = "Erreur dans l’identifiant ou le mot de passe";
 
-    return true; //arrete la fonction
+    return;
   }
 
   const result = await response.json();
-  console.log(result.token);
+
   localStorage.setItem("token", result.token);
-  window.location.href = "index.html"; // redirige(envoyer utilisateur) vers index.html
+  window.location.href = "index.html"; // envoyer utilisateur vers index.html
 }
 
 const loginForm = document.querySelector("#login-form");
