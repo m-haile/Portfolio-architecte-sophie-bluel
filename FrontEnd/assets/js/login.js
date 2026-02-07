@@ -18,6 +18,7 @@ async function login(email, password) {
 
   const result = await response.json();
 
+  // on met le token dans localStorege
   localStorage.setItem("token", result.token);
   window.location.href = "index.html"; // envoyer utilisateur vers index.html
 }
