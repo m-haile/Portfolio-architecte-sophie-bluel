@@ -115,7 +115,6 @@ async function displayCategories() {
 
     const buttons = document.querySelectorAll("button");
     buttons.forEach(function (b) {
-      // b pour le bouton
       b.classList.remove("active");
     });
 
@@ -152,10 +151,12 @@ async function displayCategories() {
 //pour créer  l'aperçu dans la 2em modale
 function displayImage(file) {
   let imageLabel = document.querySelector(".image-label");
+
   // Créer l'aperçu de l'image avec un objet URL
   const img = document.createElement("img");
   img.src = URL.createObjectURL(file);
   img.alt = file.name;
+
   // Remplace le contenu d'image label avec l'image
   imageLabel.innerHTML = "";
   imageLabel.appendChild(img);
@@ -193,14 +194,14 @@ async function addNewWork(formList) {
       let html = `<figure data-id="${work.id}" data-category-id="${work.categoryId}">
             <img src="${work.imageUrl}" alt="${work.title}" />
             <figcaption>${work.title}</figcaption>
-        </figure>`; // interpolation
+        </figure>`;
       gallery.innerHTML += html;
 
       const galleryModal = document.querySelector(".gallery-modal");
       const htmlModal = `<figure data-id="${work.id}" data-category-id="${work.categoryId}">
             <img src="${work.imageUrl}" alt="${work.title}" />
             <i class="fa-solid fa-trash-can"></i>
-          </figure>`; // interpolation
+          </figure>`;
       galleryModal.innerHTML += htmlModal;
 
       const icon = document.querySelector(`figure[data-id="${work.id}"] i`); //icon de poubelle
