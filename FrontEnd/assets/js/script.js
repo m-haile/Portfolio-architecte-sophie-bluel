@@ -17,6 +17,7 @@ function displayWorks(data) {
   let gallery = document.querySelector(".gallery");
   gallery.innerHTML = "";
 
+  //pour chaque traveax
   data.forEach(function (work) {
     let html = `<figure data-id="${work.id}" data-category-id="${work.categoryId}">
             <img src="${work.imageUrl}" alt="${work.title}" />
@@ -29,13 +30,13 @@ function displayWorks(data) {
 // pour créer(afficher) les travaux dans la modale
 function displayWorksInModal(data) {
   const gallery = document.querySelector(".gallery-modal");
-  gallery.innerHTML = ""; // pour vider l'élément
+  gallery.innerHTML = "";
 
   data.forEach(function (work) {
     const html = `<figure data-id="${work.id}" data-category-id="${work.categoryId}">
             <img src="${work.imageUrl}" alt="${work.title}" />
             <i class="fa-solid fa-trash-can"></i>
-          </figure>`; // interpolation
+          </figure>`;
     gallery.innerHTML += html;
     const iconElements = document.querySelectorAll("figure i"); //Les éléments i(icons) qui sont à l'intérieur des éléments figure
     iconElements.forEach((icon) => {
