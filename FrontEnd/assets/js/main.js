@@ -120,4 +120,50 @@ if (!token) {
       dialogElement.close();
     }
   });
+
+  // Empêcher le comportement par défaut du glisser-déposer dans la fenêtre (empêche l'ouverture du fichier dans le navigateur)
+  window.addEventListener("dragover", (e) => {
+    // Empêcher uniquement le comportement par défaut lors du glisser-déposer d'un fichier
+    if ([...e.dataTransfer.items].some((item) => item.kind === "file")) {
+      e.preventDefault();
+    }
+  });
+
+  // Empêcher le comportement par défaut de drop sur la fenêtre
+  window.addEventListener("drop", (e) => {
+    if ([...e.dataTransfer.items].some((item) => item.kind === "file")) {
+      e.preventDefault();
+    }
+  });
+
+  // Configurer la dropzone pour le téléchargement de fichiers
+  const dropImage = document.querySelector(".image-label");
+  dropImage.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    // Afficher le curseur de copie lors du déplacement au-dessus de la dropzone
+    if (e.dataTransfer) {
+      e.dataTransfer.dropEffect = "copy";
+    }
+  });
+
+  // Gérer le drop de fichiers dans la zone
+  dropImage.addEventListener("drop", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    // Récupère les fichiers
+    const files = e.dataTransfer ? e.dataTransfer.files : null;
+    //N'accepte qu'un seul fichier.
+    if (files && files.length === 1) {
+      const file = files[0];
+      try {
+        imageInput.files = files; // On met les fichiers dans input
+        displayImage(file); // On affiche l'aperçu
+        validateForm(); // On vérifie si tous les champs sont remplis
+      } catch (error) {
+        // Afficher le message d'erreur de validation
+        errorMessage.innerText = error;
+      }
+    }
+  });
 }
