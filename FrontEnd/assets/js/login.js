@@ -43,7 +43,7 @@ loginForm.addEventListener("submit", function (event) {
   }
 });
 
-//pour verifier l'email (expression régulière)
+//pour vérifier l'email (expression régulière)
 function isValidEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 

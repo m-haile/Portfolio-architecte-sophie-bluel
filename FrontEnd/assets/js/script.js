@@ -1,4 +1,4 @@
-//on devine qu’elle va récupérer  des travaux(works)
+//on récupère les données des travaux
 async function getWorks() {
   const url = "http://localhost:5678/api/works"; //je définit l'adresse de l'API que je veux contacter
   const response = await fetch(url);
@@ -7,7 +7,7 @@ async function getWorks() {
     return null;
   }
 
-  // Traduction des données JSON en objet JavaScript
+  // Traduction des données JSON en tableau d'objets JavaScript
   const result = await response.json();
   return result;
 }
@@ -17,7 +17,7 @@ function displayWorks(data) {
   let gallery = document.querySelector(".gallery");
   gallery.innerHTML = "";
 
-  //pour chaque traveax
+  //pour chaque oeuvre
   data.forEach(function (work) {
     let html = `<figure data-id="${work.id}" data-category-id="${work.categoryId}">
             <img src="${work.imageUrl}" alt="${work.title}" />
@@ -49,7 +49,7 @@ function displayWorksInModal(data) {
   });
 }
 
-//pour supprimer les image vers la prmiere modale
+//pour supprimer les images dans la prmiere modale
 async function deleteWorks(id) {
   const request = await fetch(`http://localhost:5678/api/works/${id}`, {
     method: "DELETE",
@@ -63,14 +63,14 @@ async function deleteWorks(id) {
     return;
   }
 
-  //pour selectioner les élélement figure qui ont l'attribut data-id egal à l'id qu'on veut supprimer
+  //pour sélectionner les élélements figure qui ont l'attribut data-id égal à l'id qu'on veut supprimer
   const figureElements = document.querySelectorAll(`figure[data-id="${id}"]`);
   figureElements.forEach(function (figureElement) {
     figureElement.remove();
   });
 }
 
-// Récupérer les catégories de l'API
+// Récupérer les catégories depuis l'API
 async function getCategories() {
   const url = "http://localhost:5678/api/categories";
 
@@ -83,7 +83,7 @@ async function getCategories() {
   return result;
 }
 
-//pour créer les options Category
+//pour créer les options Category dans select
 async function displayCategoryOptions() {
   const result = await getCategories();
   const selectElement = document.querySelector("#category");
@@ -99,7 +99,7 @@ async function displayCategories() {
   let filtres = document.querySelector(".filtres");
   filtres.innerHTML = "";
 
-  //Creation du bouton Tous
+  //Création du bouton Tous
   const buttonAll = document.createElement("button");
   buttonAll.textContent = "Tous";
   filtres.appendChild(buttonAll);
@@ -108,7 +108,7 @@ async function displayCategories() {
 
   //pour que le bouton Tous soit cliquable
   buttonAll.addEventListener("click", function () {
-    const allElement = document.querySelectorAll(".gallery figure"); //pour les selectioner les élément figure qui sont dans la gallery
+    const allElement = document.querySelectorAll(".gallery figure"); //pour sélectionner les éléments figure qui sont dans la gallery
     allElement.forEach(function (element) {
       element.style.display = "block";
     });
@@ -131,7 +131,7 @@ async function displayCategories() {
     button.addEventListener("click", function () {
       const buttons = document.querySelectorAll("button");
       buttons.forEach(function (b) {
-        //pour retire la classe active
+        //pour retirer la classe active
         b.classList.remove("active");
       });
 
@@ -175,7 +175,7 @@ async function addNewWork(formList) {
       body: new FormData(formList), // pour envoyer un ficher
     });
 
-    //pour recupére nouveau traveax
+    //on récupère les données que renvoie l'api
     if (response.ok) {
       const work = await response.json();
 
@@ -190,6 +190,7 @@ async function addNewWork(formList) {
               <div class="ajoutPhoto">+ Ajouter photo</div>
               <p>jpg, png : 4mo max</p>`;
 
+      // On crée l'oeuvre sur la page principale
       let gallery = document.querySelector(".gallery");
       let html = `<figure data-id="${work.id}" data-category-id="${work.categoryId}">
             <img src="${work.imageUrl}" alt="${work.title}" />
@@ -197,6 +198,7 @@ async function addNewWork(formList) {
         </figure>`;
       gallery.innerHTML += html;
 
+      // On crée l'oeuvre dans la modale
       const galleryModal = document.querySelector(".gallery-modal");
       const htmlModal = `<figure data-id="${work.id}" data-category-id="${work.categoryId}">
             <img src="${work.imageUrl}" alt="${work.title}" />
@@ -219,6 +221,7 @@ async function addNewWork(formList) {
     console.log(error);
   }
 }
+
 //pour se déconnecter
 function logout() {
   localStorage.removeItem("token");
