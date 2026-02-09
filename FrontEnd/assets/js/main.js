@@ -47,12 +47,12 @@ if (!token) {
 
   displayCategoryOptions();
 
-  //pour functionement l'icone arrow qu'est dans le 2em ecran
+  //pour functionement l'icone arrow qu'est dans le 2em modale
   const firstScreen = document.querySelector(".first-screen");
   const secondScreen = document.querySelector(".second-screen");
   const arrowElement = document.querySelector(".fa-arrow-left");
 
-  //pour afficher le 1er écran
+  //pour afficher le 1er modale
   arrowElement.addEventListener("click", () => {
     firstScreen.style.display = "grid";
     secondScreen.style.display = "none";
