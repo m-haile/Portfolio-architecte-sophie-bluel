@@ -12,13 +12,16 @@ async function getWorks() {
   return result;
 }
 
-//pour afficher des travaux
+//pour afficher les travaux dans la page prancipale
 function displayWorks(data) {
+  //Sélectionne l'élément HTML où les travaux seront affichés
   let gallery = document.querySelector(".gallery");
+  //vide la gallerie avant d'ajouter du contenu
   gallery.innerHTML = "";
 
   //pour chaque oeuvre
   data.forEach(function (work) {
+    //création Html pour chaque travail
     let html = `<figure data-id="${work.id}" data-category-id="${work.categoryId}">
             <img src="${work.imageUrl}" alt="${work.title}" />
             <figcaption>${work.title}</figcaption>
@@ -38,13 +41,14 @@ function displayWorksInModal(data) {
             <i class="fa-solid fa-trash-can"></i>
           </figure>`;
     gallery.innerHTML += html;
-    const iconElements = document.querySelectorAll("figure i"); //Les éléments i(icons) qui sont à l'intérieur des éléments figure
-    iconElements.forEach((icon) => {
-      icon.addEventListener("click", (event) => {
-        //pour récupérer l'id de work
-        const workId = icon.parentElement.dataset.id;
-        deleteWorks(workId);
-      });
+  });
+
+  const iconElements = document.querySelectorAll(".gallery-modal figure i"); //Les éléments i(icons) qui sont à l'intérieur des éléments figure
+  iconElements.forEach((icon) => {
+    icon.addEventListener("click", (event) => {
+      //pour récupérer l'id de work
+      const workId = icon.parentElement.dataset.id;
+      deleteWorks(workId);
     });
   });
 }
@@ -204,7 +208,7 @@ async function addNewWork(formList) {
             <img src="${work.imageUrl}" alt="${work.title}" />
             <i class="fa-solid fa-trash-can"></i>
           </figure>`;
-      galleryModal.innerHTML += htmlModal;
+      galleryModal.innerHTML += htmlModal; // pour affucher dans la page html
 
       const icon = document.querySelector(`figure[data-id="${work.id}"] i`); //icon de poubelle
 
