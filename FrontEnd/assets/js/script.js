@@ -35,11 +35,14 @@ function displayWorksInModal(data) {
   const gallery = document.querySelector(".gallery-modal");
   gallery.innerHTML = "";
 
+  //pour boucler chaque travail
   data.forEach(function (work) {
-    const html = `<figure data-id="${work.id}" data-category-id="${work.categoryId}">
+    //créer le HTML pour chaque travail
+    const html = `<figure data-id="${work.id}" data-category-id="${work.categoryId}"> 
             <img src="${work.imageUrl}" alt="${work.title}" />
             <i class="fa-solid fa-trash-can"></i>
           </figure>`;
+    // Ajouter le HTML dans la galarie-modale
     gallery.innerHTML += html;
   });
 
@@ -67,10 +70,10 @@ async function deleteWorks(id) {
     return;
   }
 
-  //pour sélectionner les élélements figure qui ont l'attribut data-id égal à l'id qu'on veut supprimer
-  const figureElements = document.querySelectorAll(`figure[data-id="${id}"]`);
+  //pour sélectionner les élélements figure qui ont l'attribut sélecteur CSS  data-id égal à l'id qu'on veut supprimer
+  const figureElements = document.querySelectorAll(`figure[data-id="${id}"]`); //
   figureElements.forEach(function (figureElement) {
-    figureElement.remove();
+    figureElement.remove(); //méthod pour supprimer définitivment l'élément de la page web
   });
 }
 
@@ -81,13 +84,13 @@ async function getCategories() {
   const response = await fetch(url);
   if (!response.ok) {
     console.log(response.status);
-    return true;
+    return null;
   }
   const result = await response.json();
   return result;
 }
 
-//pour créer les options Category dans select
+//pour créer les options Category dans select(dans un menu déroulant)
 async function displayCategoryOptions() {
   const result = await getCategories();
   const selectElement = document.querySelector("#category");
@@ -140,6 +143,7 @@ async function displayCategories() {
       });
 
       button.classList.add("active");
+
       const allElement = document.querySelectorAll(".gallery figure");
       allElement.forEach(function (element) {
         if (element.dataset.categoryId == category.id) {
@@ -168,6 +172,7 @@ function displayImage(file) {
 
 // pour ajouter une nouvelle oeuvre
 async function addNewWork(formList) {
+  //formlist(formlaire)
   const url = "http://localhost:5678/api/works";
 
   try {
@@ -230,4 +235,13 @@ async function addNewWork(formList) {
 function logout() {
   localStorage.removeItem("token");
   window.location.href = "index.html";
+}
+
+function validateImage(image) {
+  if (image.type === "image/png" || image.type === "image/jpg") {
+    if (image.size < 4 * 1024 * 1024) {
+      return true;
+    }
+  }
+  return false;
 }

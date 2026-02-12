@@ -103,12 +103,20 @@ if (!token) {
     e.preventDefault();
 
     const errorMessage = document.querySelector(".error-message");
+
+    //si le formulaire est rempli
     if (validateForm()) {
-      addNewWork(formList).then((success) => {
-        if (!success) {
-          errorMessage.innerText = "Erreur lors de l'ajout";
-        }
-      });
+      const image = document.querySelector("#image").files[0];
+      if (validateImage(image)) {
+        addNewWork(formList).then((success) => {
+          if (!success) {
+            errorMessage.innerText = "Erreur lors de l'ajout";
+          }
+        });
+      } else {
+        errorMessage.innerText =
+          "L'image doit être au format .jpg ou .png et faire moins de 4 Mo.";
+      }
     } else {
       errorMessage.innerText = "Veuillez remplir tous les champs";
     }
