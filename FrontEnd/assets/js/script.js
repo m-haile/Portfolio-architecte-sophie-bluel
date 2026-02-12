@@ -238,7 +238,12 @@ function logout() {
 }
 
 function validateImage(image) {
-  if (image.type === "image/png" || image.type === "image/jpg") {
+  console.log(image);
+  if (
+    image.type === "image/png" ||
+    image.type === "image/jpg" ||
+    image.type === "image/jpeg"
+  ) {
     if (image.size < 4 * 1024 * 1024) {
       return true;
     }
