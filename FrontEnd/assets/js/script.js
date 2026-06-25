@@ -58,10 +58,13 @@ function displayWorksInModal(data) {
 
 //pour supprimer les images dans la prmiere modale
 async function deleteWorks(id) {
+  if(!confirm("Vous êtes sur de le supprimer!")){
+    return;
+  }
   const request = await fetch(`http://localhost:5678/api/works/${id}`, {
     method: "DELETE",
     headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`, // pour s'identifier de l'api
+      Authorization: `Bearer ${localStorage.getItem("token")}`, 
     },
   });
 
@@ -70,10 +73,9 @@ async function deleteWorks(id) {
     return;
   }
 
-  //pour sélectionner les élélements figure qui ont l'attribut sélecteur CSS  data-id égal à l'id qu'on veut supprimer
   const figureElements = document.querySelectorAll(`figure[data-id="${id}"]`); //
   figureElements.forEach(function (figureElement) {
-    figureElement.remove(); //méthod pour supprimer définitivment l'élément de la page web
+    figureElement.remove(); 
   });
 }
 
